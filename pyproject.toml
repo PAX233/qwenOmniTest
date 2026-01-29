@@ -1,0 +1,21 @@
+[build-system]
+requires = ["uv_build>=0.5"]
+build-backend = "uv_build"
+
+[project]
+name = "qwenOmniTest"
+version = "0.1.0"
+description = "Qwen-Omni 安全对话应用"
+readme = "README.md"
+authors = [{name = "User", email = "user@example.com"}]
+license = {text = "MIT"}
+ dependencies = [
+    "dashscope==1.25.9",
+    "pyaudio>=0.2.11",
+    "python-dotenv>=1.0.0",
+    "toml>=0.10.2",
+]
+requires-python = ">=3.8"
+
+[tool.uv]
+index-url = "https://mirrors.aliyun.com/pypi/simple/"

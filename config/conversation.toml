@@ -1,0 +1,40 @@
+# 多轮对话配置文件
+# 可以通过环境变量覆盖这些设置
+
+[api]
+# API 配置
+model = "qwen3-omni-flash-realtime"
+api_url = "wss://dashscope.aliyuncs.com/api-ws/v1/realtime"
+
+[audio]
+# 音频配置
+input_format = "PCM_16000HZ_MONO_16BIT"
+output_format = "PCM_24000HZ_MONO_16BIT"
+voice = "Chelsie"
+sample_rate_input = 16000
+sample_rate_output = 24000
+chunk_size_ms = 100
+
+[conversation]
+# 存储配置
+storage_directory = "./conversations"
+file_format = "json"
+
+# 历史管理
+max_history_turns = 10
+max_context_turns = 3  # 注入到 API 的上下文轮数（建议 3-5 轮）
+auto_save_interval = 3  # 每 N 轮自动保存
+
+# 上下文注入
+enable_context_injection = true  # 是否启用对话历史上下文注入
+auto_load_last = false  # 是否自动加载上次对话
+
+# 高级配置
+enable_summary = true
+max_summary_age_turns = 20
+backup_enabled = true
+cleanup_days = 30
+
+# 性能配置
+max_context_tokens = 65000  # Qwen-Omni 最大上下文窗口
+context_buffer_ratio = 0.8
