@@ -11,6 +11,7 @@ Qwen-Omni 实时对话应用，基于 DashScope API 构建，支持完整的对�
 - 🧠 **智能上下文注入** - 自动将历史对话注入到 AI 上下文中
 - 💾 **自动保存** - 可配置的自动保存间隔
 - 📂 **对话归档** - 支持对话归档和清理
+- 📊 **Token 统计** - 实时显示 token 使用情况和生成速度
 
 ### 高级功能
 - ⚙️ **完全可配置** - 所有参数通过 TOML 配置文件管理
@@ -25,8 +26,7 @@ Qwen-Omni 实时对话应用，基于 DashScope API 构建，支持完整的对�
 
 - Python 3.11+
 - [uv](https://github.com/astral-sh/uv) - 快速 Python 包管理器
-- DashScope API Key
-
+- [DashScope API Key](https://bailian.console.aliyun.com/cn-beijing/?tab=model#/model-market/detail/qwen3-omni-flash-realtime)
 ### 安装步骤
 
 ```bash
@@ -90,6 +90,12 @@ python main.py
 --- 已连接到服务器，初始化麦克风 ---
 会话创建成功 ID: session_xxx
 现在可以开始说话了 (按 Ctrl+C 退出)
+
+你说: 你好
+你好！有什么可以帮助你的吗？
+📊 25 tokens (入: 12 / 出: 13) ⚡ 生成速度: 45.2 tokens/s
+--- 回答结束 ---
+📊 Token 使用: 25 (输入: 12, 输出: 13)
 ```
 
 ### 列出历史对话
@@ -160,6 +166,44 @@ qwenOmniTest/
 - **PyAudio** - 音频输入输出
 - **python-dotenv** - 环境变量管理
 - **toml** - 配置文件解析
+
+## 📊 Token 统计功能
+
+应用实现了实时的 Token 使用统计功能，帮助你了解 API 消耗情况：
+
+### 功能特性
+
+1. **实时统计** - 在对话过程中实时显示 token 使用情况
+2. **生成速度** - 计算并显示 token 生成速度（tokens/秒）
+3. **总量统计** - 显示总的输入/输出 token 数量
+4. **可配置** - 通过 `show_token_stats` 控制是否显示
+
+### 工作原理
+
+- Token 数量基于文本长度估算（每个字符约 0.25 token）
+- 输入 token 在用户说话转写后统计
+- 输出 token 在 AI 响应生成时实时累计
+- 每轮对话结束后显示完整的 token 使用摘要
+
+### 显示格式
+
+```
+📊 25 tokens (入: 12 / 出: 13) ⚡ 生成速度: 45.2 tokens/s
+```
+
+- **总 tokens** - 本次对话消耗的 token 总数
+- **入** - 用户输入的 token 数
+- **出** - AI 输出的 token 数
+- **生成速度** - AI 生成 token 的速度（仅生成时显示）
+
+### 配置控制
+
+在 `config/conversation.toml` 中设置：
+
+```toml
+[conversation]
+show_token_stats = true  # 是否实时显示 token 使用情况
+```
 
 ## 🧠 上下文注入机制
 
@@ -294,7 +338,6 @@ MIT License
 
 欢迎提交 Issue 和 Pull Request！
 
-## 📞 联系方式
+## 📞 仓库地址
 
-- 项目仓库：[GitHub Repository]
-- DashScope 文档：[DashScope 官方文档]
+- [GitHub Repository](https://github.com/PAX233/qwenOmniTest)

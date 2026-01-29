@@ -29,6 +29,12 @@ auto_save_interval = 3  # 每 N 轮自动保存
 enable_context_injection = true  # 是否启用对话历史上下文注入
 auto_load_last = false  # 是否自动加载上次对话
 
+# Token 统计
+show_token_stats = true  # 是否实时显示 token 使用情况
+
+# 调试配置
+debug_mode = false  # 是否启用调试模式（打印完整事件数据）
+
 # 高级配置
 enable_summary = true
 max_summary_age_turns = 20

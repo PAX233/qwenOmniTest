@@ -47,6 +47,10 @@ class ConversationConfig:
     enable_context_injection: bool = True  # 是否启用对话历史上下文注入
     auto_load_last: bool = False  # 是否自动加载上次对话
 
+    # Token 统计
+    show_token_stats: bool = True  # 是否实时显示 token 使用情况
+    debug_mode: bool = False  # 是否启用调试模式（打印完整事件数据）
+
     # 高级选项
     enable_summary: bool = True
     max_summary_age_turns: int = 20
@@ -101,6 +105,8 @@ class ConversationConfig:
             "auto_save_interval": self.auto_save_interval,
             "enable_context_injection": self.enable_context_injection,
             "auto_load_last": self.auto_load_last,
+            "show_token_stats": self.show_token_stats,
+            "debug_mode": self.debug_mode,
             "enable_summary": self.enable_summary,
             "max_summary_age_turns": self.max_summary_age_turns,
             "backup_enabled": self.backup_enabled,
